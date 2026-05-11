@@ -1,50 +1,85 @@
-# Welcome to your Expo app 👋
+# Dil Messenger - Full Stack Application
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A full-stack messenger application with React Native frontend and Node.js backend.
 
-## Get started
+## Project Structure
 
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+dil-messenger/
+├── frontend/          # React Native + Expo app
+├── backend/           # Node.js backend server
+└── README.md         # This file
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Getting Started
 
-## Learn more
+### Frontend (React Native + Expo)
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+cd frontend
+npm install
+npm start
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+See `frontend/README.md` for detailed frontend documentation.
 
-## Join the community
+### Backend (Node.js)
 
-Join our community of developers creating universal apps.
+```bash
+cd backend
+npm install
+npm start
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Create your backend setup manually to understand the architecture.
+
+## Recommended Backend Stack
+
+- **Runtime**: Node.js
+- **Framework**: Express.js
+- **Real-time**: Socket.io (for instant messaging)
+- **Database**: MongoDB / PostgreSQL
+- **Authentication**: JWT (JSON Web Tokens)
+- **API Documentation**: Swagger/OpenAPI
+
+## Backend Folder Structure Created
+
+```
+backend/
+├── src/
+│   ├── controllers/   # Request handlers
+│   ├── models/        # Database models
+│   ├── routes/        # API routes
+│   ├── services/      # Business logic
+│   ├── middleware/    # Auth, validation, etc.
+│   ├── config/        # Configuration files
+│   └── utils/         # Helper functions
+└── package.json      # (create this)
+```
+
+## Development Workflow
+
+1. Start backend server (e.g., `http://localhost:3000`)
+2. Update frontend API URLs to point to backend
+3. Test authentication flow
+4. Implement real-time messaging with WebSockets/Socket.io
+5. Deploy both services
+
+## Next Steps
+
+1. **Backend**: Initialize npm, install dependencies, create server.js
+2. **Database**: Set up MongoDB/PostgreSQL connection
+3. **API**: Create authentication and messaging endpoints
+4. **Frontend**: Connect to backend API endpoints
+5. **Real-time**: Integrate Socket.io for live messaging
+
+## Environment Variables
+
+### Frontend
+- `EXPO_PUBLIC_API_URL` - Backend API URL
+
+### Backend
+- `PORT` - Server port (default: 3000)
+- `DATABASE_URL` - Database connection string
+- `JWT_SECRET` - Secret for JWT tokens
+- `NODE_ENV` - Environment (development/production)
