@@ -8,3 +8,6 @@ export interface TypoProps {
   style?: TextStyle;
   textProps?: TextProps;
 }
+
+export * from './avatar.types';
+export * from './header.types';
