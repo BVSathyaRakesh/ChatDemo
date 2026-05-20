@@ -11,7 +11,12 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: ["chat-demo-ten-azure.vercel.app"],
+    methods: ["POST", "GET"],
+    credentials: true
+  }));
+  
 app.use("/api/auth", authRoutes)
 
 
