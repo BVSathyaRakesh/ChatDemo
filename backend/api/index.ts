@@ -1,8 +1,8 @@
 import express from "express";
 import cors from 'cors';
 import dotenv from 'dotenv';
-import connectDB from "./config/db.js";
-import authRoutes from './routes/auth.routes.js'
+import connectDB from "../config/db.js";
+import authRoutes from '../routes/auth.routes.js'
 
 dotenv.config();
 
@@ -13,17 +13,7 @@ app.use(cors({
     origin: ["https://chat-demo-git-main-bvrakesh540s-projects.vercel.app", "http://localhost:3000"],
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true
-  }));
-
-app.use("/api/auth", authRoutes)
-
-app.get("/",(req,res) => {
-    res.send("Server is running");
-})
-
-app.get("/api",(req,res) => {
-    res.json({ message: "API is running", status: "ok" });
-})
+}));
 
 // Connect to database on cold start
 let dbConnected = false;
@@ -45,7 +35,15 @@ app.use(async (req, res, next) => {
     next();
 });
 
+app.use("/api/auth", authRoutes)
+
+app.get("/",(req,res) => {
+    res.send("Server is running");
+})
+
+app.get("/api",(req,res) => {
+    res.json({ message: "API is running", status: "ok" });
+});
+
 // Export for Vercel serverless
 export default app;
-
-
