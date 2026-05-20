@@ -1,11 +1,11 @@
-# Dil Messenger - Full Stack Application
+# Chat Demo - Full Stack Application
 
 A full-stack messenger application with React Native frontend and Node.js backend.
 
 ## Project Structure
 
 ```
-dil-messenger/
+chatdemo/
 ├── frontend/          # React Native + Expo app
 ├── backend/           # Node.js backend server
 └── README.md         # This file
