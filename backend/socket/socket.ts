@@ -20,7 +20,7 @@ export function initializeSocket(server:any): SocketIOServer {
         const token = socket.handshake.auth.token
         if (!token) {
             console.error('❌ Authentication failed: no token provided');
-            return next(new Error("Authentication error: no token provided"))
+            return next(new Error("no token provided"))
         }
 
         try {
@@ -32,7 +32,7 @@ export function initializeSocket(server:any): SocketIOServer {
 
             if (!user) {
                 console.error('❌ Authentication failed: user not found');
-                return next(new Error("Authentication error: user not found"));
+                return next(new Error("user not found"));
             }
 
             // Attach user data to socket
@@ -44,8 +44,13 @@ export function initializeSocket(server:any): SocketIOServer {
             console.log('✅ Socket authenticated for user:', user.name, '(', user.email, ')');
             next();
         } catch (err: any) {
-            console.error('❌ Authentication failed:', err.message);
-            return next(new Error("Authentication error: " + err.message));
+            console.error('❌ JWT verification failed:', err.message);
+            if (err.name === 'TokenExpiredError') {
+                return next(new Error("token expired"));
+            } else if (err.name === 'JsonWebTokenError') {
+                return next(new Error("invalid token"));
+            }
+            return next(new Error("authentication failed"));
         }
     })
 

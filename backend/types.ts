@@ -8,6 +8,8 @@ export interface UserProps extends Document {
   created?: Date;
 }
 
+export type UserResponseProps = Omit<UserProps, 'password'>;
+
 export interface ConversationProps extends Document {
   _id: Types.ObjectId;
   type: "direct" | "group";

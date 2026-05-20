@@ -13,6 +13,10 @@ export const Header: React.FC<HeaderProps> = ({
   rightComponent,
   style,
   titleStyle,
+  leftIcon,
+  onLeftPress,
+  rightIcon,
+  onRightPress,
 }) => {
   const router = useRouter();
 
@@ -20,21 +24,65 @@ export const Header: React.FC<HeaderProps> = ({
     if (onBackPress) {
       onBackPress();
     } else {
-      router.back();
+       router.back();
     }
   };
 
-  return (
-    <View style={[styles.container, style]}>
-      {showBackButton && (
+  const handleLeftPress = () => {
+    if (onLeftPress) {
+      onLeftPress();
+    } else {
+      handleBackPress();
+    }
+  };
+
+  const renderLeftIcon = () => {
+    if (leftIcon) {
+      return (
         <TouchableOpacity
-          style={styles.backButton}
+          style={styles.leftButton}
+          onPress={handleLeftPress}
+          activeOpacity={0.7}
+        >
+          {leftIcon}
+        </TouchableOpacity>
+      );
+    }
+    if (showBackButton) {
+      return (
+        <TouchableOpacity
+          style={styles.leftButton}
           onPress={handleBackPress}
           activeOpacity={0.7}
         >
           <ArrowLeft size={24} color={colors.neutral800} weight="bold" />
         </TouchableOpacity>
-      )}
+      );
+    }
+    return null;
+  };
+
+  const renderRightIcon = () => {
+    if (rightIcon) {
+      return (
+        <TouchableOpacity
+          style={styles.rightContainer}
+          onPress={onRightPress}
+          activeOpacity={0.7}
+        >
+          {rightIcon}
+        </TouchableOpacity>
+      );
+    }
+    if (rightComponent) {
+      return <View style={styles.rightContainer}>{rightComponent}</View>;
+    }
+    return null;
+  };
+
+  return (
+    <View style={[styles.container, style]}>
+      {renderLeftIcon()}
       <View style={styles.titleContainer}>
         <Typo
           size={20}
@@ -45,7 +93,7 @@ export const Header: React.FC<HeaderProps> = ({
           {title}
         </Typo>
       </View>
-      {rightComponent && <View style={styles.rightContainer}>{rightComponent}</View>}
+      {renderRightIcon()}
     </View>
   );
 };
@@ -59,7 +107,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacingX._20,
     position: 'relative',
   },
-  backButton: {
+  leftButton: {
     position: 'absolute',
     left: spacingX._20,
     zIndex: 1,

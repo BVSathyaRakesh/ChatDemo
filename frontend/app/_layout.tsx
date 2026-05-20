@@ -20,6 +20,7 @@ export default function RootLayout() {
           <Stack initialRouteName="index" screenOptions={{ headerShown: false }}>
             <Stack.Screen name="index" />
             <Stack.Screen name="(main)/profilemodal" options={{ presentation: 'modal' }} />
+            <Stack.Screen name="(main)/newConversationsModal" options={{ presentation: 'modal' }} />
           </Stack>
           <StatusBar style="auto" />
         </ThemeProvider>

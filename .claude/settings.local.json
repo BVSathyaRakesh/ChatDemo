@@ -4,7 +4,9 @@
       "Bash(ls:*)",
       "Bash(npm install:*)",
       "Bash(npm test:*)",
-      "Bash(npm list:*)"
+      "Bash(npm list:*)",
+      "Read(//Users/satkumar/Desktop/Apps/Personale/**)",
+      "Bash(mv dil-messenger:*)"
     ]
   }
 }

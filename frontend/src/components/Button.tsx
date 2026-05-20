@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { TouchableOpacity, StyleSheet, ViewStyle, TextStyle, TouchableOpacityProps } from 'react-native';
 import { colors } from '@/constants/theme';
 import Typo from './Typo';
 
 export interface ButtonProps {
-  title: string;
+  title?: string;
   onPress: () => void;
   style?: ViewStyle;
   textStyle?: TextStyle;
   disabled?: boolean;
+  children?: ReactNode;
 }
 
 export const Button = ({
@@ -17,6 +18,7 @@ export const Button = ({
   style,
   textStyle,
   disabled = false,
+  children,
 }: ButtonProps) => {
   return (
     <TouchableOpacity
@@ -25,14 +27,18 @@ export const Button = ({
       disabled={disabled}
       activeOpacity={0.8}
     >
-      <Typo
-        size={18}
-        fontWeight="600"
-        color={colors.text}
-        style={[styles.buttonText, textStyle]}
-      >
-        {title}
-      </Typo>
+      {children ? (
+        children
+      ) : (
+        <Typo
+          size={18}
+          fontWeight="600"
+          color={colors.text}
+          style={[styles.buttonText, textStyle]}
+        >
+          {title}
+        </Typo>
+      )}
     </TouchableOpacity>
   );
 };

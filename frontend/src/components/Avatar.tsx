@@ -2,18 +2,29 @@ import React from 'react';
 import { Image, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { PencilSimple } from 'phosphor-react-native';
 import { AvatarProps } from '@/src/types/avatar.types';
-import { getAvatarPath } from '@/src/utils/getAvatarPath';
+import { getAvatarPath, getGroupAvatarPath } from '@/src/utils/getAvatarPath';
 import { colors } from '@/constants/theme';
 
 export const Avatar: React.FC<AvatarProps> = ({
   uri,
+  name,
+  email,
   size = 100,
   style,
   rounded = true,
+  isGroup = false,
   showEditButton = false,
   onEditPress,
 }) => {
-  const avatarSource = getAvatarPath(uri);
+  // Check if avatar is a valid remote URL
+  const isValidRemoteUrl = uri && (uri.startsWith('http://') || uri.startsWith('https://'));
+
+  // Get appropriate avatar source
+  const avatarSource = isValidRemoteUrl
+    ? { uri }
+    : isGroup
+      ? getGroupAvatarPath(null)
+      : getAvatarPath(null);
 
   return (
     <View style={[styles.container, style]}>

@@ -6,9 +6,10 @@ import { StyleSheet, TextInput, TextInputProps, View, Animated } from 'react-nat
 interface InputFieldProps extends TextInputProps {
   icon?: React.ReactNode;
   disabled?: boolean;
+  containerStyle?: any;
 }
 
-export const InputField = ({ icon, disabled = false, ...props }: InputFieldProps) => {
+export const InputField = ({ icon, disabled = false, containerStyle, ...props }: InputFieldProps) => {
   const borderColorAnim = useRef(new Animated.Value(0)).current;
 
   const handleFocus = (e: any) => {
@@ -40,18 +41,19 @@ export const InputField = ({ icon, disabled = false, ...props }: InputFieldProps
     <Animated.View
       style={[
         styles.container,
-        { borderColor },
-        disabled && styles.disabledContainer
+        disabled && styles.disabledContainer,
+        containerStyle,
+        { borderColor }
       ]}
     >
       {icon && <View style={styles.iconContainer}>{icon}</View>}
       <TextInput
+        {...props}
         style={[styles.input, disabled && styles.disabledInput]}
         placeholderTextColor={colors.neutral400}
         onFocus={handleFocus}
         onBlur={handleBlur}
         editable={!disabled}
-        {...props}
       />
     </Animated.View>
   );
@@ -61,7 +63,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: colors.neutral100,
+    backgroundColor: colors.neutral200,
     borderRadius: 100,
     paddingHorizontal: spacingX._20,
     height: verticalScale(56),

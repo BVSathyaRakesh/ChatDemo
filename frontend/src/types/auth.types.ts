@@ -51,4 +51,6 @@ export interface AuthContextProps {
   login: (credentials: LoginCredentialsProps) => Promise<void>;
   register: (credentials: RegisterCredentialsProps) => Promise<void>;
   logout: () => Promise<void>;
+  updateAuth: (token: string, user: UserProps) => Promise<void>;
+  refreshUser: () => Promise<void>;
 }

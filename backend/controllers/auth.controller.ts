@@ -1,14 +1,12 @@
 import type { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import User from '../modals/User.js';
+import { generateToken } from '../utils/jwt.js';
+import { formatUserResponse } from '../utils/userResponse.js';
 
-// Generate JWT token
-const generateToken = (userId: string): string => {
-  return jwt.sign({ userId }, process.env.JWT_SECRET as string, {
-    expiresIn: '7d',
-  });
-};
+interface AuthRequest extends Request {
+  userId?: string;
+}
 
 // @desc    Register a new user
 // @route   POST /api/auth/register
@@ -58,13 +56,7 @@ export const registerUser = async (req: Request, res: Response): Promise<void> =
       success: true,
       message: 'User registered successfully',
       data: {
-        user: {
-          _id: user._id,
-          email: user.email,
-          name: user.name,
-          avatar: user.avatar,
-          created: user.created,
-        },
+        user: formatUserResponse(user),
         token,
       },
     });
@@ -117,13 +109,7 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
       success: true,
       message: 'Login successful',
       data: {
-        user: {
-          _id: user._id,
-          email: user.email,
-          name: user.name,
-          avatar: user.avatar,
-          created: user.created,
-        },
+        user: formatUserResponse(user),
         token,
       },
     });
@@ -132,6 +118,33 @@ export const loginUser = async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({
       success: false,
       message: 'Server error during login'
+    });
+  }
+};
+
+// @desc    Get current user
+// @route   GET /api/auth/me
+// @access  Private
+export const getCurrentUser = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const user = await User.findById(req.userId);
+
+    if (!user) {
+      res.status(404).json({ success: false, message: 'User not found' });
+      return;
+    }
+
+    res.status(200).json({
+      success: true,
+      data: {
+        user: formatUserResponse(user),
+      },
+    });
+  } catch (error) {
+    console.error('Get current user error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Server error'
     });
   }
 };

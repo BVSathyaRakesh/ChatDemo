@@ -7,4 +7,8 @@ export interface HeaderProps {
   rightComponent?: React.ReactNode;
   style?: ViewStyle;
   titleStyle?: TextStyle;
+  leftIcon?: React.ReactNode;
+  onLeftPress?: () => void;
+  rightIcon?: React.ReactNode;
+  onRightPress?: () => void;
 }

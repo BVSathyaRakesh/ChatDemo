@@ -20,6 +20,8 @@ export const AuthContext = createContext<AuthContextProps>({
   login: async () => {},
   register: async () => {},
   logout: async () => {},
+  updateAuth: async () => {},
+  refreshUser: async () => {},
 });
 
 // Provider component
@@ -143,6 +145,26 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       router.replace('/(main)/home')
   }
 
+  // Update auth (for profile updates)
+  const updateAuth = async (newToken: string, newUser: UserProps) => {
+    await storageService.setAuth(newToken, newUser);
+    setToken(newToken);
+    setUser(newUser);
+  };
+
+  // Refresh user data from server
+  const refreshUser = async () => {
+    try {
+      if (!token) return;
+
+      const freshUser = await authService.getCurrentUser();
+      await storageService.setAuth(token, freshUser);
+      setUser(freshUser);
+    } catch (error) {
+      console.error('Error refreshing user:', error);
+    }
+  };
+
   const value: AuthContextProps = {
     user,
     token,
@@ -151,6 +173,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     login: handleLogin,
     register: handleRegister,
     logout: handleLogout,
+    updateAuth,
+    refreshUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

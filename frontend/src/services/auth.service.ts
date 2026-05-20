@@ -27,6 +27,12 @@ export const authService = {
     return response.data.data;
   },
 
+  // Get current user from server
+  getCurrentUser: async () => {
+    const response = await axios.get(`${API_BASE_URL}/auth/me`);
+    return response.data.data.user;
+  },
+
   // Check if token is expired
   isTokenExpired: (token: string): boolean => {
     try {
