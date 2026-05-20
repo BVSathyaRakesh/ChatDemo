@@ -13,13 +13,7 @@ const getBaseURL = () => {
   }
 
   // Development - Auto-detect platform
-  if (Platform.OS === 'android') {
-    // Android emulator: 10.0.2.2 routes to host machine's localhost
-    return 'http://10.0.2.2:3000/api';
-  }
-
-  // iOS simulator or web
-  return 'http://localhost:3000/api';
+   return 'https://chat-demo-git-main-bvrakesh540s-projects.vercel.app';
 };
 
 export const API_BASE_URL = getBaseURL();

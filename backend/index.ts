@@ -12,7 +12,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin: ["chat-demo-ten-azure.vercel.app"],
+    origin: ["https://chat-demo-git-main-bvrakesh540s-projects.vercel.app"],
     methods: ["POST", "GET"],
     credentials: true
   }));
