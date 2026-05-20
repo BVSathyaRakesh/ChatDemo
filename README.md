@@ -1,4 +1,4 @@
-# Dil Messenger - Full Stack Application
+# Chat Demo - Full Stack Application
 
 A full-stack messenger application with React Native frontend and Node.js backend.
 
