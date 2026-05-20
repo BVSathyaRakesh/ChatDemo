@@ -8,7 +8,13 @@ export interface UserProps extends Document {
   created?: Date;
 }
 
-export type UserResponseProps = Omit<UserProps, 'password'>;
+export interface UserResponseProps {
+  _id: Types.ObjectId;
+  email: string;
+  name?: string;
+  avatar?: string;
+  created?: Date;
+}
 
 export interface ConversationProps extends Document {
   _id: Types.ObjectId;

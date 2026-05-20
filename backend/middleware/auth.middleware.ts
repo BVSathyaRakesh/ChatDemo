@@ -15,6 +15,12 @@ export const authMiddleware = (req: AuthRequest, res: Response, next: NextFuncti
     }
 
     const token = authHeader.split(' ')[1];
+
+    if (!token) {
+      res.status(401).json({ success: false, message: 'No token provided' });
+      return;
+    }
+
     const secret = process.env.JWT_SECRET;
 
     if (!secret) {
