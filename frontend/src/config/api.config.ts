@@ -13,7 +13,7 @@ const getBaseURL = () => {
   }
 
   // Development - Auto-detect platform
-   return 'https://chat-demo-git-main-bvrakesh540s-projects.vercel.app';
+   return 'https://chat-demo-git-main-bvrakesh540s-projects.vercel.app/api';
 };
 
 export const API_BASE_URL = getBaseURL();

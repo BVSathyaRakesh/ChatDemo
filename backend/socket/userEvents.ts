@@ -1,7 +1,7 @@
 import { Socket, Server as SocketIOServer } from "socket.io";
-import User from "../modals/User.js";
-import { generateToken } from "../utils/jwt.js";
-import { formatUserResponse } from "../utils/userResponse.js";
+import User from "../modals/User";
+import { generateToken } from "../utils/jwt";
+import { formatUserResponse } from "../utils/userResponse";
 
 
 export function registerUserEvents(io: SocketIOServer, socket: Socket){

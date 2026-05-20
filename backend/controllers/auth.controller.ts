@@ -1,8 +1,8 @@
 import type { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
-import User from '../modals/User.js';
-import { generateToken } from '../utils/jwt.js';
-import { formatUserResponse } from '../utils/userResponse.js';
+import User from '../modals/User';
+import { generateToken } from '../utils/jwt';
+import { formatUserResponse } from '../utils/userResponse';
 
 interface AuthRequest extends Request {
   userId?: string;

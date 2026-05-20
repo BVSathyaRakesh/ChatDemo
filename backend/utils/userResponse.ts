@@ -1,4 +1,4 @@
-import type { UserProps, UserResponseProps } from "../types.js";
+import type { UserProps, UserResponseProps } from "../types";
 
 export const formatUserResponse = (user: UserProps): UserResponseProps => {
   return {

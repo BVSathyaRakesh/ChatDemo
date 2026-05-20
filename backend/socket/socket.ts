@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import   {Server as SocketIOServer, Socket} from 'socket.io';
-import { registerUserEvents } from './userEvents.js';
-import User from '../modals/User.js';
+import { registerUserEvents } from './userEvents';
+import User from '../modals/User';
 
 dotenv.config();
 
