@@ -15,11 +15,21 @@ export const authMiddleware = (req: AuthRequest, res: Response, next: NextFuncti
     }
 
     const token = authHeader.split(' ')[1];
+    const secret = process.env.JWT_SECRET;
 
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as { userId: string };
-    req.userId = decoded.userId;
+    if (!secret) {
+      res.status(500).json({ success: false, message: 'Server configuration error' });
+      return;
+    }
 
-    next();
+    const decoded = jwt.verify(token, secret);
+
+    if (typeof decoded === 'object' && decoded !== null && 'userId' in decoded) {
+      req.userId = (decoded as { userId: string }).userId;
+      next();
+    } else {
+      res.status(401).json({ success: false, message: 'Invalid token format' });
+    }
   } catch (error) {
     res.status(401).json({ success: false, message: 'Invalid or expired token' });
   }
