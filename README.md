@@ -5,7 +5,7 @@ A full-stack messenger application with React Native frontend and Node.js backen
 ## Project Structure
 
 ```
-dil-messenger/
+chatdemo/
 ├── frontend/          # React Native + Expo app
 ├── backend/           # Node.js backend server
 └── README.md         # This file
